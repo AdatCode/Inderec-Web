@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear producto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{
+      background-color:#f8f9fa;
+    }
+    .form-card{
+      max-width: 850px;
+      margin: 40px auto;
+      border: none;
+      border-radius: 16px;
+    }
+    .page-title{
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/admin/dashboard">Sistema Catálogo</a>
+      <a href="/admin/dashboard" class="btn btn-outline-light btn-sm">Volver al dashboard</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card shadow form-card">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="page-title mb-4">Crear producto</h2>
+
+        <% if (ok) { %>
+          <div class="alert alert-success">Producto guardado correctamente</div>
+        <% } %>
+
+        <% if (error) { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <form action="/admin/productos/guardar" method="POST" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" name="nombre" class="form-control" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Marca</label>
+              <input type="text" name="marca" class="form-control" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Categoría</label>
+              <select name="categoria_id" class="form-select" required>
+                <option value="">Seleccione una categoría</option>
+                <% categorias.forEach(categoria => { %>
+                  <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="4" required></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Stock</label>
+              <input type="number" name="stock" class="form-control" min="0" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Precio</label>
+              <input type="number" step="0.01" name="precio" class="form-control" min="0" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ubicación</label>
+              <input type="text" name="ubicacion_rack" class="form-control" placeholder="Ej: A-03">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Enlace de referencia del producto</label>
+            <input type="url" name="enlace_referencia" class="form-control" placeholder="https://...">
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Imagen</label>
+            <input type="file" name="imagen" class="form-control" accept="image/*">
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Guardar producto</button>
+            <a href="/admin/dashboard" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

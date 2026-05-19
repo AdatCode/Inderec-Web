@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .producto-img{
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #f1f1f1;
+    }
+    .card-producto{
+      border: none;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/catalogo">Sistema Catálogo</a>
+      <div class="d-flex gap-2">
+        <% if (usuario && usuario.rol === 'admin') { %>
+          <a href="/admin/dashboard" class="btn btn-outline-light btn-sm">Panel admin</a>
+          <a href="/logout" class="btn btn-light btn-sm">Cerrar sesión</a>
+        <% } else { %>
+          <a href="/login" class="btn btn-light btn-sm">Acceso admin</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-4">
+    <h2 class="mb-4">Catálogo de productos</h2>
+
+    <div class="row mb-4">
+      <div class="col-lg-8">
+        <div class="input-group input-group-lg">
+          <span class="input-group-text">🔍</span>
+          <input 
+            type="text" 
+            id="buscadorCatalogo" 
+            class="form-control" 
+            placeholder="Buscar"
+          >
+          <button class="btn btn-outline-secondary" type="button" id="btnLimpiarBusqueda">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mt-3 mt-lg-0 d-flex align-items-center">
+        <span id="contadorResultados" class="text-muted">Mostrando <%= productos.length %> productos</span>
+      </div>
+    </div>
+
+    <div class="mb-4 d-flex flex-wrap gap-2 align-items-center">
+      <button class="btn btn-dark btn-sm" type="button" id="btnTodosCategorias">
+        Todos
+      </button>
+
+      <div class="dropdown">
+        <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownCategoriasBtn">
+          Categorías
+        </button>
+
+        <ul class="dropdown-menu">
+          <% categorias.forEach(categoria => { %>
+            <li>
+              <button 
+                class="dropdown-item filtro-categoria-dropdown" 
+                type="button"
+                data-categoria="<%= categoria.nombre %>">
+                <%= categoria.nombre %>
+              </button>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <span class="text-muted small" id="categoriaSeleccionada">Categoría: Todas</span>
+    </div>
+
+    <div id="sinResultados" class="alert alert-warning d-none">
+      No se encontraron productos con esa búsqueda.
+    </div>
+
+    <div class="row g-4">
+      <% if (productos.length === 0) { %>
+        <div class="col-12">
+          <div class="alert alert-secondary">No hay productos disponibles.</div>
+        </div>
+      <% } %>
+
+      <% productos.forEach(producto => { %>
+        <div class="col-md-6 col-lg-4 producto-item"
+             data-nombre="<%= producto.nombre %>"
+             data-marca="<%= producto.marca || '' %>"
+             data-descripcion="<%= producto.descripcion %>"
+             data-categoria="<%= producto.categoria || '' %>">
+          <div class="card shadow-sm card-producto h-100">
+            <div class="card-body">
+              <% if (producto.imagen) { %>
+                <img src="<%= producto.imagen %>" class="producto-img mb-3" alt="<%= producto.nombre %>">
+              <% } else { %>
+                <div class="producto-img d-flex align-items-center justify-content-center mb-3">
+                  <span>Sin imagen</span>
+                </div>
+              <% } %>
+
+              <h5 class="card-title"><%= producto.nombre %></h5>
+              <p class="text-muted mb-1"><strong>Marca:</strong> <%= producto.marca || 'Sin marca' %></p>
+              <p class="text-muted mb-2"><strong>Categoría:</strong> <%= producto.categoria || 'Sin categoría' %></p>
+              <p class="card-text"><%= producto.descripcion %></p>
+              <p class="mb-1"><strong>Stock:</strong> <%= producto.stock %></p>
+              <p class="mb-3"><strong>Precio:</strong> $<%= Number(producto.precio).toFixed(2) %></p>
+
+              <div class="d-flex gap-2 flex-wrap">
+              <a href="/catalogo/producto/<%= producto.id %>" class="btn btn-dark btn-sm">
+                Ver detalle
+              </a>
+
+              <a 
+              href="https://wa.me/?text=Hola,%20quiero%20información%20del%20producto%20<%= encodeURIComponent(producto.nombre) %>"
+              target="_blank"
+              class="btn btn-success btn-sm"
+              >
+              WhatsApp
+              </a>
+
+              <% if (producto.enlace_referencia) { %>
+              <a href="<%= producto.enlace_referencia %>" target="_blank" class="btn btn-outline-primary btn-sm">
+              Ver referencia
+              </a>
+              <% } %>
+            </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const buscador = document.getElementById('buscadorCatalogo');
+    const btnLimpiar = document.getElementById('btnLimpiarBusqueda');
+    const productos = document.querySelectorAll('.producto-item');
+    const contador = document.getElementById('contadorResultados');
+    const sinResultados = document.getElementById('sinResultados');
+
+    const btnTodosCategorias = document.getElementById('btnTodosCategorias');
+    const botonesDropdownCategoria = document.querySelectorAll('.filtro-categoria-dropdown');
+    const categoriaSeleccionada = document.getElementById('categoriaSeleccionada');
+    const dropdownCategoriasBtn = document.getElementById('dropdownCategoriasBtn');
+
+    let categoriaActiva = 'todos';
+
+    function normalizarTexto(texto) {
+      return (texto || '')
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function actualizarEtiquetaCategoria() {
+      if (categoriaActiva === 'todos') {
+        categoriaSeleccionada.textContent = 'Categoría: Todas';
+        btnTodosCategorias.classList.remove('btn-outline-dark');
+        btnTodosCategorias.classList.add('btn-dark');
+        dropdownCategoriasBtn.classList.remove('btn-dark');
+        dropdownCategoriasBtn.classList.add('btn-outline-dark');
+        dropdownCategoriasBtn.textContent = 'Categorías';
+      } else {
+        categoriaSeleccionada.textContent = `Categoría: ${categoriaActiva}`;
+        btnTodosCategorias.classList.remove('btn-dark');
+        btnTodosCategorias.classList.add('btn-outline-dark');
+        dropdownCategoriasBtn.classList.remove('btn-outline-dark');
+        dropdownCategoriasBtn.classList.add('btn-dark');
+        dropdownCategoriasBtn.textContent = categoriaActiva;
+      }
+    }
+
+    function filtrarProductos() {
+      const texto = normalizarTexto(buscador.value.trim());
+      const categoria = normalizarTexto(categoriaActiva);
+      let visibles = 0;
+
+      productos.forEach(producto => {
+        const nombre = normalizarTexto(producto.dataset.nombre);
+        const marca = normalizarTexto(producto.dataset.marca);
+        const descripcion = normalizarTexto(producto.dataset.descripcion);
+        const categoriaProducto = normalizarTexto(producto.dataset.categoria);
+
+        const coincideTexto =
+          nombre.includes(texto) ||
+          marca.includes(texto) ||
+          descripcion.includes(texto);
+
+        const coincideCategoria =
+          categoria === 'todos' || categoriaProducto === categoria;
+
+        if (coincideTexto && coincideCategoria) {
+          producto.classList.remove('d-none');
+          visibles++;
+        } else {
+          producto.classList.add('d-none');
+        }
+      });
+
+      contador.textContent = `Mostrando ${visibles} producto${visibles !== 1 ? 's' : ''}`;
+
+      if (visibles === 0) {
+        sinResultados.classList.remove('d-none');
+      } else {
+        sinResultados.classList.add('d-none');
+      }
+    }
+
+    buscador.addEventListener('input', filtrarProductos);
+
+    btnTodosCategorias.addEventListener('click', () => {
+      categoriaActiva = 'todos';
+      actualizarEtiquetaCategoria();
+      filtrarProductos();
+    });
+
+    botonesDropdownCategoria.forEach(boton => {
+      boton.addEventListener('click', () => {
+        categoriaActiva = boton.dataset.categoria;
+        actualizarEtiquetaCategoria();
+        filtrarProductos();
+      });
+    });
+
+    btnLimpiar.addEventListener('click', () => {
+      buscador.value = '';
+      categoriaActiva = 'todos';
+      actualizarEtiquetaCategoria();
+      filtrarProductos();
+      buscador.focus();
+    });
+
+    actualizarEtiquetaCategoria();
+  </script>
+</body>
+</html>
