@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session); // <-- Añadido
+const MySQLStore = require('express-mysql-session')(session);
 const cors = require('cors');
 require('dotenv').config();
 
@@ -12,7 +12,6 @@ const authRoutes = require('./routes/authRoutes');
 const productoRoutes = require('./routes/productoRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
-const { soloAdmin } = require('./middlewares/authMiddleware');
 
 // Configuración
 app.set('view engine', 'ejs');
@@ -24,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configurar el almacenamiento seguro de sesiones en la base de datos de Hostinger
+// Sesiones en MySQL
 const sessionStore = new MySQLStore({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT || 3306,
@@ -33,21 +32,27 @@ const sessionStore = new MySQLStore({
   database: process.env.DB_NAME
 });
 
-app.set('trust proxy', 1); // <-- Es Obligatorio en Hostinger para evitar bloqueos por HTTPS
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
 
 app.use(session({
   key: 'session_cookie_catalogo',
   secret: process.env.SESSION_SECRET || 'secreto_alternativo_por_si_acaso',
-  store: sessionStore, // <-- Guarda la sesión en la BD, haciéndola inmune a los reinicios
+  store: sessionStore,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true, // <-- Configuración segura para el entorno HTTPS de internet
+    secure: isProduction,
     sameSite: 'lax',
-    maxAge: 1000 * 60 * 60 * 24 // Tu sesión administrativa durará activa 24 horas
+    maxAge: 1000 * 60 * 60 * 24
   }
 }));
 
+// ESTA PARTE FALTABA
+// Hace que "usuario" esté disponible en todas las vistas EJS
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario || null;
   next();

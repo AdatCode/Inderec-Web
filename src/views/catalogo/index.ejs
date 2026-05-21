@@ -20,12 +20,12 @@
   </style>
 </head>
 <body class="bg-light">
-
+  <% const usuarioActual = typeof usuario !== 'undefined' ? usuario : null; %>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container">
       <a class="navbar-brand fw-bold" href="/catalogo">Sistema Catálogo</a>
       <div class="d-flex gap-2">
-        <% if (usuario && usuario.rol === 'admin') { %>
+        <% if (usuarioActual && usuarioActual.rol === 'admin') { %>
           <a href="/admin/dashboard" class="btn btn-outline-light btn-sm">Panel admin</a>
           <a href="/logout" class="btn btn-light btn-sm">Cerrar sesión</a>
         <% } else { %>
