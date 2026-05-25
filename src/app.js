@@ -51,10 +51,66 @@ app.use(session({
   }
 }));
 
-// ESTA PARTE FALTABA
-// Hace que "usuario" esté disponible en todas las vistas EJS
+// Temas aleatorios para el cuadro de bienvenida
+const temasHeroDashboard = [
+  {
+    accent: '#f4b400',
+    glow: 'rgba(244,180,0,.75)',
+    radial: 'rgba(244,180,0,.22)'
+  },
+  {
+    accent: '#8b5cf6',
+    glow: 'rgba(139,92,246,.75)',
+    radial: 'rgba(139,92,246,.24)'
+  },
+  {
+    accent: '#06b6d4',
+    glow: 'rgba(6,182,212,.70)',
+    radial: 'rgba(6,182,212,.22)'
+  },
+  {
+    accent: '#22c55e',
+    glow: 'rgba(34,197,94,.70)',
+    radial: 'rgba(34,197,94,.22)'
+  },
+  {
+    accent: '#ef4444',
+    glow: 'rgba(239,68,68,.70)',
+    radial: 'rgba(239,68,68,.22)'
+  },
+  {
+    accent: '#f97316',
+    glow: 'rgba(249,115,22,.70)',
+    radial: 'rgba(249,115,22,.22)'
+  },
+  {
+    accent: '#ec4899',
+    glow: 'rgba(236,72,153,.70)',
+    radial: 'rgba(236,72,153,.22)'
+  },
+  {
+    accent: '#14b8a6',
+    glow: 'rgba(20,184,166,.70)',
+    radial: 'rgba(20,184,166,.22)'
+  }
+];
+
+// Variables globales para las vistas
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario || null;
+
+  if (req.session.usuario) {
+    if (!req.session.heroTheme) {
+      const randomIndex = Math.floor(Math.random() * temasHeroDashboard.length);
+      req.session.heroTheme = temasHeroDashboard[randomIndex];
+    }
+
+    res.locals.heroTheme = req.session.heroTheme;
+  } else {
+    delete req.session.heroTheme;
+    res.locals.heroTheme = null;
+  }
+
   next();
 });
 

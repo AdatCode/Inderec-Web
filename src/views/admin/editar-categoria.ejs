@@ -5,113 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar categoría</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
+    :root{
+      --dark-1:#111827;
+      --dark-2:#1f2937;
+      --gray-bg:#f5f7fb;
+      --gray-border:#e5e7eb;
+      --gray-text:#64748b;
+      --yellow:#f4b400;
+      --yellow-soft:#fff8e1;
+    }
+
     body{
-      background:#f5f7fb;
+      background: var(--gray-bg);
+      font-family: Arial, sans-serif;
+      color: var(--dark-1);
     }
+
     .topbar{
-      background:linear-gradient(135deg,#111827,#1f2937);
+      background: linear-gradient(90deg, #0f172a, #14213d, #1f2937);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
+
+    .navbar-brand{
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: .3px;
+    }
+
+    .btn-nav{
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 8px 14px;
+    }
+
+    .page-wrapper{
+      min-height: calc(100vh - 76px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
     .form-card{
-      border:none;
-      border-radius:22px;
-      box-shadow:0 12px 30px rgba(15,23,42,.07);
+      width: 100%;
+      max-width: 620px;
+      background: #fff;
+      border: 1px solid #edf1f7;
+      border-radius: 24px;
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
     }
+
+    .form-header{
+      padding: 28px 30px 16px;
+      background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      border-bottom: 1px solid #eef2f7;
+    }
+
+    .form-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow-soft);
+      border: 1px solid #fde68a;
+      color: #8a6500;
+      font-weight: 800;
+      font-size: .85rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .form-title{
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0;
+      color: var(--dark-1);
+    }
+
+    .form-subtitle{
+      margin-top: 8px;
+      margin-bottom: 0;
+      color: var(--gray-text);
+      font-size: .98rem;
+      font-weight: 600;
+    }
+
+    .form-body{
+      padding: 26px 30px 30px;
+    }
+
+    .input-group-custom{
+      background: #fff;
+      border: 1px solid var(--gray-border);
+      border-radius: 18px;
+      padding: 18px 18px 14px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+    }
+
     .form-label{
-      font-weight:600;
-      color:#374151;
-      margin-bottom:6px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--dark-2);
+      margin-bottom: 10px;
     }
+
     .form-control{
-      border-radius:12px;
-      border:1px solid #dbe1ea;
-      padding-top:.62rem;
-      padding-bottom:.62rem;
+      border-radius: 14px;
+      border: 1px solid #dbe3ee;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark-1);
     }
+
     .form-control:focus{
-      border-color:#7c3aed;
-      box-shadow:0 0 0 .2rem rgba(124,58,237,.12);
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 .2rem rgba(244, 180, 0, .15);
     }
 
-    .numero-wrap{
-      display:flex;
-      justify-content:center;
-      margin-bottom:1.2rem;
+    .helper-text{
+      margin-top: 8px;
+      color: #94a3b8;
+      font-size: .85rem;
+      font-weight: 600;
     }
 
-    .numero-box{
-      width:130px;
-      text-align:center;
+    .actions{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
     }
 
-    .numero-box .form-label{
-      display:block;
-      text-align:center;
-      color:#6d28d9;
-      font-weight:700;
-      font-size:.95rem;
+    .btn-save{
+      background: linear-gradient(135deg, #f4b400, #e0a800);
+      color: #111827;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 22px;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(244, 180, 0, 0.18);
     }
 
-    .numero-box .form-control{
-      text-align:center;
-      font-weight:800;
-      font-size:1.1rem;
-      color:#4c1d95;
-      background:linear-gradient(135deg,#f5f3ff,#ede9fe);
-      border:1px solid #c4b5fd;
-      box-shadow:0 8px 18px rgba(124,58,237,.10);
+    .btn-save:hover{
+      background: linear-gradient(135deg, #ffd45c, #f4b400);
+      color: #111827;
+      transform: translateY(-1px);
     }
 
-    .numero-box .form-control:focus{
-      border-color:#8b5cf6;
-      box-shadow:0 0 0 .2rem rgba(139,92,246,.16);
-      background:#fff;
+    .btn-cancel{
+      background: #6b7280;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 22px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .btn-cancel:hover{
+      background: #4b5563;
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .alert{
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 576px){
+      .form-header,
+      .form-body{
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .form-title{
+        font-size: 1.7rem;
+      }
+
+      .actions{
+        flex-direction: column;
+      }
+
+      .actions .btn,
+      .actions a{
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
-<body class="bg-light">
 
-  <nav class="navbar navbar-dark topbar">
-    <div class="container">
-      <a href="/admin/dashboard" class="navbar-brand">Panel Admin</a>
+<body>
+  <% const categoriaId = categoria.id || categoria.id_categoria; %>
+
+  <nav class="navbar navbar-expand-lg navbar-dark topbar">
+    <div class="container py-2">
+      <a class="navbar-brand" href="/admin/dashboard">Panel Admin</a>
+
       <div class="d-flex gap-2">
-        <a href="/admin/categorias" class="btn btn-outline-light btn-sm">Volver</a>
-        <a href="/logout" class="btn btn-light btn-sm">Cerrar sesión</a>
+        <a href="/admin/categorias" class="btn btn-outline-light btn-sm btn-nav">Volver</a>
+        <a href="/logout" class="btn btn-light btn-sm btn-nav">Cerrar sesión</a>
       </div>
     </div>
   </nav>
 
-  <div class="container py-4">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5">
-        <div class="card form-card">
-          <div class="card-body p-4">
-            <h3 class="mb-4 fw-bold text-center">Editar categoría</h3>
+  <div class="page-wrapper">
+    <div class="form-card">
 
-            <% if (error) { %>
-              <div class="alert alert-danger"><%= error %></div>
-            <% } %>
-
-            <form action="/admin/categorias/actualizar/<%= categoria.id %>" method="POST">
-              <div class="numero-wrap">
-                <div class="numero-box">
-                  <label class="form-label">N°</label>
-                  <input type="number" name="orden" class="form-control" min="1" value="<%= categoria.orden || '' %>" required>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" name="nombre" class="form-control" value="<%= categoria.nombre %>" required>
-              </div>
-
-              <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn btn-primary">Actualizar categoría</button>
-                <a href="/admin/categorias" class="btn btn-secondary">Cancelar</a>
-              </div>
-            </form>
-          </div>
+      <div class="form-header">
+        <div class="form-badge">
+          🗂️ Editar categoría
         </div>
+
+        <h1 class="form-title">Editar categoría</h1>
+        <p class="form-subtitle">
+          Actualiza el nombre de la categoría que se mostrará en el catálogo.
+        </p>
+      </div>
+
+      <div class="form-body">
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <% if (typeof ok !== 'undefined' && ok) { %>
+          <div class="alert alert-success">Categoría actualizada correctamente.</div>
+        <% } %>
+
+        <form action="/admin/categorias/editar/<%= categoriaId %>" method="POST">
+          <div class="input-group-custom">
+            <label class="form-label">Nombre</label>
+
+            <input 
+              type="text" 
+              name="nombre" 
+              class="form-control" 
+              value="<%= categoria.nombre || '' %>"
+              placeholder="Ej: Rack S2, Accesorios, Herramientas..."
+              required
+            >
+
+            <div class="helper-text">
+              Este nombre será visible en el filtro de categorías y en los productos relacionados.
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-save">
+              Actualizar categoría
+            </button>
+
+            <a href="/admin/categorias" class="btn btn-cancel">
+              Cancelar
+            </a>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
