@@ -85,6 +85,10 @@
       padding: 34px 0 46px;
     }
 
+    /* ===========================
+       HERO PREMIUM ALEATORIO
+    ============================ */
+
     .hero-card{
       --hero-accent: #f4b400;
       --hero-glow: rgba(244,180,0,.75);
@@ -251,6 +255,198 @@
       animation: tituloGlow 4s ease-in-out infinite;
     }
 
+    /* ===========================
+       VARIANTES ALEATORIAS
+    ============================ */
+
+    .hero-curve .hero-orb{
+      border-radius:55% 45% 0 0;
+    }
+
+    .hero-curve .hero-dots{
+      display:block;
+    }
+
+    .hero-rings .hero-orb{
+      right:-120px;
+      bottom:-140px;
+      width:520px;
+      height:520px;
+      border-radius:50%;
+      background:transparent;
+      border:3px solid var(--hero-accent);
+      box-shadow:
+        0 0 45px var(--hero-glow),
+        inset 0 0 45px var(--hero-radial);
+      opacity:.45;
+    }
+
+    .hero-rings .hero-orb::before{
+      inset:55px;
+      border-radius:50%;
+      border:2px solid var(--hero-radial);
+    }
+
+    .hero-rings .hero-orb::after{
+      right:120px;
+      bottom:120px;
+      width:170px;
+      height:170px;
+      background:var(--hero-radial);
+    }
+
+    .hero-rings .hero-dots{
+      right:55px;
+      bottom:55px;
+    }
+
+    .hero-diagonal .hero-orb{
+      right:-160px;
+      bottom:-90px;
+      width:760px;
+      height:280px;
+      border-radius:38px;
+      transform:rotate(-18deg);
+      background:linear-gradient(
+        135deg,
+        var(--hero-radial),
+        rgba(255,255,255,.05),
+        transparent
+      );
+    }
+
+    .hero-diagonal .hero-orb::before{
+      inset:28px;
+      border-radius:30px;
+      border-top:3px solid var(--hero-accent);
+      border-left:none;
+    }
+
+    .hero-diagonal .hero-mark{
+      right:140px;
+      top:55px;
+    }
+
+    .hero-waves .hero-orb{
+      right:-80px;
+      bottom:-135px;
+      width:720px;
+      height:360px;
+      border-radius:60% 40% 45% 55%;
+      background:
+        radial-gradient(circle at 30% 40%, var(--hero-radial), transparent 35%),
+        linear-gradient(135deg, var(--hero-radial), transparent 70%);
+    }
+
+    .hero-waves .hero-orb::before{
+      inset:36px;
+      border-radius:inherit;
+      border-top:3px solid var(--hero-accent);
+      border-left:0;
+    }
+
+    .hero-waves .hero-dots{
+      right:270px;
+      bottom:36px;
+    }
+
+    .hero-spotlight{
+      background:
+        radial-gradient(circle at 78% 45%, var(--hero-radial), transparent 32%),
+        radial-gradient(circle at 22% 20%, rgba(255,255,255,.08), transparent 24%),
+        linear-gradient(135deg, #030712 0%, #111827 48%, #05070d 100%);
+    }
+
+    .hero-spotlight .hero-orb{
+      right:35px;
+      bottom:25px;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:var(--hero-radial);
+      filter:blur(18px);
+      opacity:.9;
+    }
+
+    .hero-spotlight .hero-orb::before{
+      inset:28px;
+      border-radius:50%;
+      border:2px solid var(--hero-accent);
+    }
+
+    .hero-spotlight .hero-orb::after{
+      display:none;
+    }
+
+    .hero-aurora{
+      background:
+        radial-gradient(circle at 82% 44%, var(--hero-radial), transparent 28%),
+        linear-gradient(120deg, #05070d 0%, #111827 35%, rgba(255,255,255,.05) 50%, #07090f 100%);
+    }
+
+    .hero-aurora .hero-orb{
+      right:-30px;
+      bottom:-110px;
+      width:720px;
+      height:300px;
+      border-radius:999px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        var(--hero-radial),
+        rgba(255,255,255,.06),
+        transparent
+      );
+      filter:blur(2px);
+    }
+
+    .hero-aurora .hero-orb::before{
+      inset:38px;
+      border-top:3px solid var(--hero-accent);
+      border-left:none;
+    }
+
+    .hero-glass .hero-orb{
+      right:38px;
+      bottom:28px;
+      width:280px;
+      height:150px;
+      border-radius:28px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 35px var(--hero-radial);
+      transform:rotate(-8deg);
+    }
+
+    .hero-glass .hero-orb::before{
+      inset:18px;
+      border-radius:22px;
+      border:1px solid var(--hero-radial);
+    }
+
+    .hero-glass .hero-orb::after{
+      right:28px;
+      bottom:28px;
+      width:80px;
+      height:80px;
+      background:var(--hero-radial);
+    }
+
+    .hero-rings .hero-orb,
+    .hero-spotlight .hero-orb{
+      animation:heroPulseAlt 7s ease-in-out infinite;
+    }
+
+    .hero-diagonal .hero-orb,
+    .hero-aurora .hero-orb{
+      animation:heroSlideAlt 8s ease-in-out infinite;
+    }
+
+    .hero-glass .hero-orb{
+      animation:heroGlassFloat 6.5s ease-in-out infinite;
+    }
+
     @keyframes heroEntrada{
       from{
         opacity: 0;
@@ -353,6 +549,35 @@
       100%{
         left:115%;
         opacity:0;
+      }
+    }
+
+    @keyframes heroPulseAlt{
+      0%,100%{
+        transform:scale(1);
+        opacity:.45;
+      }
+      50%{
+        transform:scale(1.06);
+        opacity:.75;
+      }
+    }
+
+    @keyframes heroSlideAlt{
+      0%,100%{
+        transform:rotate(-18deg) translateX(0);
+      }
+      50%{
+        transform:rotate(-18deg) translateX(-22px);
+      }
+    }
+
+    @keyframes heroGlassFloat{
+      0%,100%{
+        transform:rotate(-8deg) translateY(0);
+      }
+      50%{
+        transform:rotate(-8deg) translateY(-16px);
       }
     }
 
@@ -510,11 +735,18 @@
         padding: 42px 26px 40px;
       }
 
+      .hero-rings .hero-orb,
+      .hero-diagonal .hero-orb,
+      .hero-waves .hero-orb,
+      .hero-spotlight .hero-orb,
+      .hero-aurora .hero-orb,
+      .hero-glass .hero-orb,
       .hero-orb{
-        width: 420px;
-        height: 260px;
-        right: -170px;
-        opacity: .75;
+        width:420px;
+        height:240px;
+        right:-170px;
+        bottom:-90px;
+        opacity:.7;
       }
 
       .hero-mark,
@@ -548,6 +780,7 @@
       typeof heroTheme !== 'undefined' && heroTheme
         ? heroTheme
         : {
+            variant: 'curve',
             accent: '#f4b400',
             glow: 'rgba(244,180,0,.75)',
             radial: 'rgba(244,180,0,.22)'
@@ -571,7 +804,7 @@
   <div class="container dashboard-wrap">
 
     <div 
-      class="hero-card"
+      class="hero-card hero-<%= temaHero.variant || 'curve' %>"
       style="
         --hero-accent:<%= temaHero.accent %>;
         --hero-glow:<%= temaHero.glow %>;
