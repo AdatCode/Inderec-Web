@@ -382,6 +382,80 @@
         width:100%;
       }
     }
+    /* ===== BOTONES SUPERIORES DETALLE PRODUCTO ===== */
+.catalog-top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.catalog-top-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-size:.92rem;
+  font-weight:900;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 10px 22px rgba(244,180,0,.24);
+  transition:all .18s ease;
+  white-space:nowrap;
+}
+
+.catalog-top-btn:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 14px 30px rgba(244,180,0,.34);
+}
+
+.catalog-top-btn:active{
+  transform:translateY(0);
+}
+
+/* ===== BOTÓN VOLVER AL CATÁLOGO ===== */
+.btn-back-catalog{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 20px;
+  border-radius:16px;
+  background:#ffffff;
+  color:#334155;
+  font-weight:900;
+  text-decoration:none;
+  border:1px solid #dbe3ee;
+  box-shadow:0 10px 24px rgba(15,23,42,.06);
+  transition:all .18s ease;
+}
+
+.btn-back-catalog:hover{
+  color:#111827;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  border-color:#f4b400;
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(244,180,0,.25);
+}
+
+@media(max-width:576px){
+  .catalog-top-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .catalog-top-btn,
+  .btn-back-catalog{
+    width:100%;
+  }
+}
   </style>
 </head>
 
@@ -396,8 +470,15 @@
 
       <div class="d-flex gap-2">
         <% if (usuarioActual && usuarioActual.rol === 'admin') { %>
-          <a href="/admin/dashboard" class="btn btn-outline-light btn-sm btn-nav">Panel admin</a>
-          <a href="/logout" class="btn btn-light btn-sm btn-nav">Cerrar sesión</a>
+          <div class="catalog-top-actions">
+  <a href="/admin/dashboard" class="catalog-top-btn">
+    🏠 Panel admin
+  </a>
+
+  <a href="/logout" class="catalog-top-btn">
+    🔒 Cerrar sesión
+  </a>
+</div>
         <% } else { %>
           <a href="/login" class="btn btn-light btn-sm btn-nav">Acceso admin</a>
         <% } %>

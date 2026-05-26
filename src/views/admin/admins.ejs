@@ -137,6 +137,57 @@
       color: #6b7280;
       font-weight: 600;
     }
+    /* ===== BOTONES SUPERIORES ADMINISTRADORES ===== */
+
+.admin-top-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.admin-nav-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:7px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-size:.92rem;
+  font-weight:900;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 10px 22px rgba(244,180,0,.24);
+  transition:all .18s ease;
+  white-space:nowrap;
+}
+
+.admin-nav-btn:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 14px 30px rgba(244,180,0,.34);
+}
+
+.admin-nav-btn:active{
+  transform:translateY(0);
+}
+
+@media(max-width:768px){
+  .admin-top-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    justify-content:flex-start;
+  }
+
+  .admin-nav-btn{
+    width:100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -145,11 +196,19 @@
     <div class="container">
       <span class="navbar-brand fw-bold">Panel de Administración</span>
 
-      <div class="d-flex align-items-center gap-2">
-        <a href="/admin/dashboard" class="btn btn-outline-light btn-sm">Dashboard</a>
-        <a href="/catalogo" class="btn btn-outline-light btn-sm">Ver catálogo</a>
-        <a href="/logout" class="btn btn-light btn-sm">Cerrar sesión</a>
-      </div>
+      <div class="admin-top-actions">
+  <a href="/admin/dashboard" class="admin-nav-btn">
+    📊 Dashboard
+  </a>
+
+  <a href="/catalogo" class="admin-nav-btn">
+    🛍️ Ver catálogo
+  </a>
+
+  <a href="/logout" class="admin-nav-btn">
+    🔒 Cerrar sesión
+  </a>
+</div>
     </div>
   </nav>
 

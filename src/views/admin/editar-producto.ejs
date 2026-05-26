@@ -305,6 +305,52 @@
         width:100%;
       }
     }
+    .admin-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn-admin-gold{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:none;
+  border-radius:999px;
+  padding:7px 10px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-weight:900;
+  font-size:.92rem;
+  text-decoration:none;
+  box-shadow:0 10px 22px rgba(244,180,0,.22);
+  transition:all .18s ease;
+}
+
+.btn-admin-gold:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 14px 28px rgba(244,180,0,.32);
+}
+
+.btn-admin-gold:active{
+  transform:translateY(0);
+}
+
+@media(max-width:576px){
+  .admin-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .btn-admin-gold{
+    width:100%;
+  }
+}
   </style>
 </head>
 
@@ -328,10 +374,15 @@
     <div class="container py-2">
       <a class="navbar-brand" href="/admin/dashboard">Sistema Catálogo</a>
 
-      <div class="d-flex gap-2">
-        <a href="/admin/dashboard" class="btn btn-outline-light btn-sm btn-nav">Panel admin</a>
-        <a href="/logout" class="btn btn-light btn-sm btn-nav">Cerrar sesión</a>
-      </div>
+     <div class="admin-actions">
+          <a href="/admin/dashboard" class="btn-admin-gold">
+            🏠 Panel admin
+          </a>
+
+          <a href="/logout" class="btn-admin-gold">
+            🔒 Cerrar sesión
+          </a>
+    </div>
     </div>
   </nav>
 
@@ -339,9 +390,6 @@
     <div class="edit-card">
       <div class="edit-header">
         <h1 class="edit-title">Editar producto</h1>
-        <p class="edit-subtitle">
-          Actualiza la información principal, interna y visual del producto.
-        </p>
       </div>
 
       <div class="edit-body">
@@ -433,7 +481,7 @@
                   min="0" 
                   required
                 >
-                <div class="helper-text">Cantidad disponible.</div>
+                
               </div>
 
               <div>
@@ -447,11 +495,11 @@
                   placeholder="Ej: 7.01"
                   inputmode="decimal"
                 >
-                <div class="helper-text">Usa punto. Ej: 7.01</div>
+                
               </div>
 
               <div>
-                <label class="form-label">Ubicación interna</label>
+                <label class="form-label">Ubicación Interna</label>
                 <input 
                   type="text" 
                   name="ubicacion_rack" 
@@ -459,7 +507,7 @@
                   value="<%= ubicacionValor %>" 
                   placeholder="Ej: Rack S3 - Nivel 2"
                 >
-                <div class="helper-text">Bodega, rack o referencia interna.</div>
+                
               </div>
             </div>
           </div>

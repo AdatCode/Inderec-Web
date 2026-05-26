@@ -198,6 +198,57 @@
         text-align: center;
       }
     }
+    /* ===== BOTONES SUPERIORES EDITAR CATEGORÍA ===== */
+
+.panel-admin-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.panel-admin-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-size:.92rem;
+  font-weight:900;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 10px 22px rgba(244,180,0,.25);
+  transition:all .18s ease;
+  white-space:nowrap;
+}
+
+.panel-admin-btn:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 14px 30px rgba(244,180,0,.34);
+}
+
+.panel-admin-btn:active{
+  transform:translateY(0);
+}
+
+@media(max-width:768px){
+  .panel-admin-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    justify-content:flex-start;
+  }
+
+  .panel-admin-btn{
+    width:100%;
+  }
+}
   </style>
 </head>
 
@@ -208,10 +259,15 @@
     <div class="container py-2">
       <a class="navbar-brand" href="/admin/dashboard">Panel Admin</a>
 
-      <div class="d-flex gap-2">
-        <a href="/admin/categorias" class="btn btn-outline-light btn-sm btn-nav">Volver</a>
-        <a href="/logout" class="btn btn-light btn-sm btn-nav">Cerrar sesión</a>
-      </div>
+      <div class="panel-admin-actions">
+  <a href="/admin/categorias" class="panel-admin-btn">
+    ← Volver
+  </a>
+
+  <a href="/logout" class="panel-admin-btn">
+    🔒 Cerrar sesión
+  </a>
+</div>
     </div>
   </nav>
 

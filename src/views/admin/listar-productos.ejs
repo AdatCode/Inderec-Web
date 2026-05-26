@@ -123,6 +123,53 @@
         flex-wrap: wrap;
       }
     }
+    .admin-nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.admin-nav-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-size:.92rem;
+  font-weight:900;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 10px 22px rgba(244,180,0,.22);
+  transition:all .18s ease;
+  white-space:nowrap;
+}
+
+.admin-nav-btn:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 14px 28px rgba(244,180,0,.32);
+}
+
+  .admin-nav-btn:active{
+  transform:translateY(0);
+}
+
+  @media(max-width:576px){
+  .admin-nav-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .admin-nav-btn{
+    width:100%;
+    }
+  }
   </style>
 </head>
 <body>
@@ -131,11 +178,19 @@
     <div class="container">
       <span class="navbar-brand fw-bold">Panel de Administración</span>
 
-      <div class="d-flex align-items-center gap-2">
-        <a href="/admin/dashboard" class="btn btn-outline-light btn-sm">Inicio</a>
-        <a href="/catalogo" class="btn btn-outline-light btn-sm">Ver catálogo</a>
-        <a href="/logout" class="btn btn-light btn-sm">Cerrar sesión</a>
-      </div>
+      <div class="admin-nav-actions">
+      <a href="/admin/dashboard" class="admin-nav-btn">
+        🏠 Inicio
+      </a>
+
+      <a href="/catalogo" class="admin-nav-btn">
+        🛍️ Ver catálogo
+      </a>
+
+      <a href="/logout" class="admin-nav-btn">
+        🔒 Cerrar sesión
+      </a>
+    </div>
     </div>
   </nav>
 

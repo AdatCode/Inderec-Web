@@ -192,21 +192,434 @@
         font-size:1.65rem;
       }
     }
+    /* ===== TOPBAR CREAR PRODUCTO ===== */
+
+.topbar-admin-custom{
+  background: linear-gradient(135deg, #0f172a 0%, #1f2937 45%, #0b1220 100%);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.admin-topbar-inner{
+  width: 100%;
+  max-width: 1280px;   /* este valor controla que quede alineado con los cuadros de abajo */
+  margin: 0 auto;
+  padding: 0 34px;     /* ajusta esto si quieres mover un poquito */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand-logo-wrap{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-logo-img{
+  width: 165px;   /* aquí agrandas o achicas el logo */
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.topbar-actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.topbar-yellow-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f4b400, #ffd65a);
+  color: #111827;
+  font-size: .98rem;
+  font-weight: 900;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 12px 24px rgba(244,180,0,.28);
+  transition: all .18s ease;
+  white-space: nowrap;
+}
+
+.topbar-yellow-btn:hover{
+  color: #111827;
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow: 0 16px 32px rgba(244,180,0,.36);
+}
+
+.topbar-yellow-btn:active{
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 991px){
+  .admin-topbar-inner{
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .brand-logo-wrap{
+    justify-content: center;
+  }
+
+  .brand-logo-img{
+    width: 145px;
+  }
+
+  .topbar-actions{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px){
+  .brand-logo-img{
+    width: 130px;
+  }
+
+  .topbar-yellow-btn{
+    padding: 10px 18px;
+    font-size: .93rem;
+  }
+}
+/* ===== TOPBAR CREAR PRODUCTO ALINEADO CON EL CUADRO ===== */
+
+.topbar-producto{
+  width:100%;
+  height:118px;
+  background:linear-gradient(135deg, #111827, #1f2937, #0f172a);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  box-shadow:0 10px 26px rgba(15,23,42,.12);
+  display:flex;
+  align-items:center;
+}
+
+/* Este ancho debe quedar igual al cuadro blanco de abajo */
+.topbar-producto-inner{
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+/* LOGO alineado al borde izquierdo del cuadro */
+.topbar-logo-link{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  text-decoration:none;
+  height:80px;
+  padding:0;
+  margin:0;
+}
+
+.topbar-logo-img{
+  width:200px !important;
+  height:auto !important;
+  object-fit:contain !important;
+  display:block !important;
+
+  /* agranda visualmente el logo sin agrandar la barra */
+  transform:scale(1.75) !important;
+  transform-origin:left center !important;
+
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.35)) !important;
+}
+
+/* BOTONES alineados al borde derecho del cuadro */
+.topbar-producto-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:14px;
+}
+
+.topbar-producto-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:7px 24px;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f4b400, #ffd65a);
+  color:#111827;
+  font-size:1rem;
+  font-weight:900;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 12px 26px rgba(244,180,0,.28);
+  transition:all .18s ease;
+  white-space:nowrap;
+}
+
+.topbar-producto-btn:hover{
+  color:#111827;
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, #ffd65a, #f4b400);
+  box-shadow:0 16px 34px rgba(244,180,0,.36);
+}
+
+.topbar-producto-btn:active{
+  transform:translateY(0);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .topbar-producto{
+    height:auto;
+    padding:14px 16px;
+  }
+
+  .topbar-producto-inner{
+    max-width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .topbar-logo-img{
+    width:110px;
+  }
+
+  .topbar-producto-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .topbar-producto-btn{
+    width:100%;
+  }
+}
+/* ===== AJUSTE TOPBAR CREAR PRODUCTO ===== */
+
+/* Reduce la franja azul */
+.topbar-producto{
+  height:86px !important;
+  min-height:86px !important;
+  padding:0 !important;
+}
+
+/* Mantiene logo y botones alineados al cuadro */
+.topbar-producto-inner{
+  height:86px !important;
+  min-height:86px !important;
+  max-width:1225px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+
+/* Agranda el logo */
+.topbar-logo-img{
+  width:px !important;
+  height:auto !important;
+  object-fit:contain !important;
+  display:block !important;
+  transform:scale(1.35) !important;
+  transform-origin:left center !important;
+}
+
+/* Opcional: botones un poquito más compactos */
+.topbar-producto-btn{
+  padding:10px 22px !important;
+  font-size:.95rem !important;
+}
+/* ===== JUNTAR LOGO Y BOTONES DEL TOPBAR CREAR PRODUCTO ===== */
+
+/* Hace que el logo y botones estén más cerca entre sí */
+.topbar-producto-inner{
+  max-width:106 0px !important;
+  padding:0 !important;
+}
+
+/* Mueve el logo más a la derecha */
+.topbar-logo-link{
+  transform:translateX(35px) !important;
+}
+
+/* Mueve los botones más a la izquierda */
+.topbar-producto-actions{
+  transform:translateX(15px) !important;
+}
+
+/* Responsive: en celular no moverlos */
+@media(max-width:768px){
+  .topbar-producto-inner{
+    max-width:100% !important;
+    padding:0 16px !important;
+  }
+
+  .topbar-logo-link,
+  .topbar-producto-actions{
+    transform:none !important;
+  }
+}
+/* ===== JUNTAR LOGO Y BOTONES DEL TOPBAR CREAR PRODUCTO ===== */
+
+/* Hace que el logo y botones estén más cerca entre sí */
+.topbar-producto-inner{
+  max-width:1050px !important;
+  padding:0 !important;
+}
+
+/* Mueve el logo más a la derecha */
+.topbar-logo-link{
+  transform:translateX(35px) !important;
+}
+
+/* Mueve los botones más a la izquierda */
+.topbar-producto-actions{
+  transform:translateX(-35px) !important;
+}
+
+/* Responsive: en celular no moverlos */
+@media(max-width:768px){
+  .topbar-producto-inner{
+    max-width:100% !important;
+    padding:0 16px !important;
+  }
+
+  .topbar-logo-link,
+  .topbar-producto-actions{
+    transform:none !important;
+  }
+}
+/* ===== AJUSTE FINAL TOPBAR CREAR PRODUCTO ===== */
+
+/* Mantiene la barra delgada */
+.topbar-producto{
+  height:86px !important;
+  min-height:86px !important;
+  padding:0 !important;
+}
+
+/* Mantiene el contenido alineado con el cuadro */
+.topbar-producto-inner{
+  max-width:965px !important;
+  height:86px !important;
+  min-height:86px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+
+/* MOVER LOGO MÁS A LA IZQUIERDA */
+.topbar-logo-link{
+  transform:translateX(-95px) !important;
+}
+
+/* Tamaño del logo */
+.topbar-logo-img{
+  width:165px !important;
+  height:auto !important;
+  object-fit:contain !important;
+  display:block !important;
+  transform:scale(1.25) !important;
+  transform-origin:left center !important;
+}
+
+/* BOTONES MÁS PEQUEÑOS */
+.topbar-producto-actions{
+  gap:10px !important;
+  transform:none !important;
+}
+
+.topbar-producto-btn{
+  padding:8px 16px !important;
+  font-size:.82rem !important;
+  border-radius:999px !important;
+  gap:6px !important;
+  box-shadow:0 8px 18px rgba(244,180,0,.22) !important;
+}
+
+/* En celular se acomoda normal */
+@media(max-width:768px){
+  .topbar-producto{
+    height:auto !important;
+    min-height:auto !important;
+    padding:14px 16px !important;
+  }
+
+  .topbar-producto-inner{
+    max-width:100% !important;
+    height:auto !important;
+    min-height:auto !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+
+  .topbar-logo-link{
+    transform:none !important;
+  }
+
+  .topbar-logo-img{
+    width:120px !important;
+    transform:scale(1.1) !important;
+  }
+
+  .topbar-producto-actions{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+
+  .topbar-producto-btn{
+    width:100% !important;
+    padding:10px 14px !important;
+    font-size:.88rem !important;
+  }
+}
+/* Mover logo INDEMARC hacia la derecha */
+.topbar-logo-link{
+  transform:translateX(-65px) !important;
+}
+
   </style>
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark topbar">
-    <div class="container py-2">
-      <a class="navbar-brand" href="/admin/dashboard">Sistema Catálogo</a>
+  <nav class="topbar-producto">
+  <div class="topbar-producto-inner">
+    <a class="topbar-logo-link" href="/admin/dashboard">
+      <img src="/img/indemarc.png" alt="INDEMARC" class="topbar-logo-img">
+    </a>
 
-      <div class="d-flex gap-2">
-        <a href="/admin/productos" class="btn btn-outline-light btn-sm btn-nav">Productos</a>
-        <a href="/admin/dashboard" class="btn btn-light btn-sm btn-nav">Dashboard</a>
-      </div>
+    <div class="topbar-producto-actions">
+      <a href="/admin/productos" class="topbar-producto-btn">
+        📦 Productos
+      </a>
+
+      <a href="/admin/dashboard" class="topbar-producto-btn">
+        📊 Dashboard
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <div class="container page-wrap">
     <div class="card form-card">
